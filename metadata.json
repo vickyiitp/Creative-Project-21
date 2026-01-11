@@ -1,0 +1,5 @@
+{
+  "name": "QuickSort Racer",
+  "description": "A high-octane competitive sorting game. Race against the CPU by choosing the optimal sorting algorithm for various datasets.",
+  "requestFramePermissions": []
+}

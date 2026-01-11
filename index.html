@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- SEO & Branding -->
+    <title>QuickSort Racer | Competitive Algorithm Game by Vicky Kumar</title>
+    <meta name="description" content="Race against the CPU in this high-octane competitive sorting game. Developed by Vicky Kumar (vickyiitp). Test your logic with real-time algorithm visualization." />
+    <meta name="keywords" content="QuickSort Racer, Vicky Kumar, vickyiitp, AI developer, IIT Patna, sorting algorithms, competitive coding game, visualization" />
+    <meta name="author" content="Vicky Kumar" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="canonical" href="https://vickyiitp.tech/quicksort-racer" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vickyiitp.tech/quicksort-racer" />
+    <meta property="og:title" content="QuickSort Racer | Competitive Algorithm Game" />
+    <meta property="og:description" content="A real-time algorithm racing game. Choose the right sort to beat the CPU." />
+    <meta property="og:image" content="https://vickyiitp.tech/assets/quicksort-preview.jpg" />
+    <meta property="og:site_name" content="QuickSort Racer" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://vickyiitp.tech/quicksort-racer" />
+    <meta property="twitter:title" content="QuickSort Racer" />
+    <meta property="twitter:description" content="Compete against AI in this sorting algorithm racer." />
+    <meta property="twitter:image" content="https://vickyiitp.tech/assets/quicksort-preview.jpg" />
+    <meta property="twitter:creator" content="@vickyiitp" />
+
+    <!-- Preconnects for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "QuickSort Racer",
+          "url": "https://vickyiitp.tech",
+          "author": {
+            "@type": "Person",
+            "name": "Vicky Kumar",
+            "url": "https://vickyiitp.tech"
+          }
+        },
+        {
+          "@type": "Game",
+          "name": "QuickSort Racer",
+          "genre": "Educational",
+          "description": "A competitive sorting algorithm game."
+        }
+      ]
+    }
+    </script>
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #050505;
+        color: #e2e8f0;
+        overflow-x: hidden;
+      }
+      h1, h2, h3, .font-display {
+        font-family: 'Orbitron', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      
+      /* --- SCROLLBAR --- */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #22d3ee; 
+        border-radius: 0;
+        border: 1px solid #0891b2;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #67e8f9;
+        box-shadow: 0 0 10px #22d3ee;
+      }
+      
+      /* --- GLASS & GRID --- */
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(6, 182, 212, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* --- CYBERPUNK ANIMATIONS --- */
+      
+      /* Moving Perspective Grid */
+      .cyber-grid {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background-image: 
+          linear-gradient(transparent 0%, rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, transparent 0%, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+        background-size: 60px 60px;
+        transform: perspective(500px) rotateX(60deg);
+        animation: cyber-grid-move 20s linear infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+      
+      @keyframes cyber-grid-move {
+        0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+        100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
+      }
+
+      /* CRT Scanlines */
+      .scanlines {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.2) 50%,
+          rgba(0,0,0,0.2)
+        );
+        background-size: 100% 4px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.15;
+      }
+
+      /* Glitch Effect */
+      .glitch {
+        position: relative;
+      }
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .glitch::before {
+        left: 2px;
+        text-shadow: -1px 0 #ff00c1;
+        clip: rect(24px, 550px, 90px, 0);
+        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+      }
+      .glitch::after {
+        left: -2px;
+        text-shadow: -1px 0 #00fff9;
+        clip: rect(85px, 550px, 140px, 0);
+        animation: glitch-anim 2.5s infinite linear alternate-reverse;
+      }
+
+      @keyframes glitch-anim {
+        0% { clip: rect(13px, 9999px, 81px, 0); }
+        20% { clip: rect(98px, 9999px, 12px, 0); }
+        40% { clip: rect(4px, 9999px, 114px, 0); }
+        60% { clip: rect(74px, 9999px, 55px, 0); }
+        80% { clip: rect(28px, 9999px, 86px, 0); }
+        100% { clip: rect(65px, 9999px, 23px, 0); }
+      }
+      @keyframes glitch-anim-2 {
+        0% { clip: rect(65px, 9999px, 100px, 0); }
+        20% { clip: rect(12px, 9999px, 4px, 0); }
+        40% { clip: rect(87px, 9999px, 65px, 0); }
+        60% { clip: rect(4px, 9999px, 87px, 0); }
+        80% { clip: rect(23px, 9999px, 12px, 0); }
+        100% { clip: rect(100px, 9999px, 65px, 0); }
+      }
+
+      /* Utility Animations */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      .text-shadow-neon {
+        text-shadow: 0 0 5px rgba(34, 211, 238, 0.8), 0 0 10px rgba(34, 211, 238, 0.5);
+      }
+      
+      .box-glow {
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+      }
+      .box-glow-pink {
+        box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <div class="scanlines"></div>
+  </body>
+</html>
